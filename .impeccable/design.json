@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T15:26:46.733170+00:00",
+  "title": "Design System: Image Press",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "dial",
+        "value": "0 2px 3px #20211f25",
+        "purpose": "Depth beneath physical dial."
+      },
+      {
+        "name": "paper",
+        "value": "3px 9px 15px #71221538",
+        "purpose": "Lift of paper in the proof field."
+      }
+    ],
+    "motion": [
+      {
+        "name": "print-cycle",
+        "value": "2400ms",
+        "purpose": "Existing emerging-sheet and roller cycle."
+      },
+      {
+        "name": "casing-follow",
+        "value": "0.22s",
+        "purpose": "Exponential follow time constant; reduced motion resolves immediately."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "540px"
+      },
+      {
+        "name": "single-column",
+        "value": "800px"
+      },
+      {
+        "name": "compact-controls",
+        "value": "1190px"
+      },
+      {
+        "name": "wide",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Print action",
+      "kind": "button",
+      "description": "Print action from the implemented interface.",
+      "html": "<button class=\"ds-print\">Pull a print</button>",
+      "css": ".ds-print{font-family:var(--sans);font-size:19px;font-weight:500;display:flex;align-items:center;justify-content:space-between;width:100%;min-height:62px;padding:14px 20px;border:1px solid var(--carbon);border-radius:0;background:var(--carbon);color:var(--paper)}.ds-print:hover{background:var(--vermilion-deep);border-color:var(--vermilion-deep)}.ds-print:focus-visible{outline:2px solid var(--vermilion);outline-offset:5px}.ds-print:active{transform:translateY(1px)}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Upload action",
+      "kind": "button",
+      "description": "Upload action from the implemented interface.",
+      "html": "<button class=\"ds-upload\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M12 4v16M4 12h16\"/></svg>Feed a photograph</button>",
+      "css": ".ds-upload{display:flex;align-items:center;gap:14px;min-height:48px;padding:0 16px;border:1px solid var(--carbon);border-radius:0;background:transparent;color:var(--carbon);font:12px var(--sans)}.ds-upload:hover{background:var(--carbon);color:var(--paper)}.ds-upload:focus-visible{outline:2px solid var(--vermilion);outline-offset:5px}",
+      "refersTo": "button-upload"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "description": "Text action from the implemented interface.",
+      "html": "<button class=\"ds-text\">Open casing</button>",
+      "css": ".ds-text{border:0;background:transparent;color:var(--carbon);min-height:44px;padding:0;font:11px var(--sans)}.ds-text:hover{color:var(--vermilion-deep)}.ds-text:focus-visible{outline:2px solid var(--vermilion);outline-offset:5px}",
+      "refersTo": "button-text"
+    },
+    {
+      "name": "Measured range",
+      "kind": "input",
+      "description": "Measured range from the implemented interface.",
+      "html": "<label class=\"ds-label\" for=\"ds-halftone\">Halftone size</label><input class=\"ds-range\" id=\"ds-halftone\" type=\"range\" min=\"6\" max=\"36\" value=\"14\"/>",
+      "css": ".ds-label{display:block;font:12px var(--sans);color:var(--carbon)}.ds-range{appearance:none;width:100%;height:44px;margin:0;background:transparent;cursor:ew-resize}.ds-range::-webkit-slider-runnable-track{height:2px;background:var(--rule)}.ds-range::-webkit-slider-thumb{appearance:none;width:5px;height:15px;margin-top:-6px;background:var(--carbon);border:0;border-radius:0}.ds-range:focus-visible{outline:2px solid var(--vermilion);outline-offset:5px}"
+    },
+    {
+      "name": "Export action",
+      "kind": "button",
+      "description": "Export action from the implemented interface.",
+      "html": "<button class=\"ds-export\"><span>Save impression<small>PNG \u00b7 1600 \u00d7 2000 px</small></span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4\"/></svg></button>",
+      "css": ".ds-export{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:65px;padding:12px 0 0;border:0;border-top:1px solid var(--carbon);border-radius:0;background:transparent;color:#10110f;text-align:left;font:500 17px var(--sans)}.ds-export small{display:block;font:11px var(--mono);margin-top:7px}.ds-export:hover>span{text-decoration:underline;text-underline-offset:4px}.ds-export:focus-visible{outline:2px solid var(--carbon);outline-offset:5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Swiss print specimen",
+    "overview": "Oversized red lettering, carbon rules and an upright photographic proof around a working Anatomy press. Recorded implementation awaiting creative direction.",
+    "keyCharacteristics": [
+      "Cool paper and region-sized vermilion",
+      "Measured controls",
+      "Physical mechanism with a matching live proof"
+    ],
+    "rules": [
+      {
+        "name": "Measured mono",
+        "body": "Reserve Roboto Mono for quantities, edition counts and export dimensions.",
+        "section": "typography"
+      },
+      {
+        "name": "Depth belongs to the object",
+        "body": "Keep interface panels flat; reserve offset blurred shadows for the dial and paper.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Keep native ranges available alongside dials.",
+      "Verify mobile, keyboard and reduced motion."
+    ],
+    "donts": [
+      "Do not restore the removed introductory taglines.",
+      "Do not make this project a universal style template."
+    ]
+  }
+}

@@ -7,6 +7,8 @@ const settings = { ...DEFAULTS };
 const proof = $('#proof');
 const message = $('#message');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+const arrowIcon = '<svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>';
+const casingIcon = '<svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg>';
 let source, geometry, assemblies = [], open = 0, targetOpen = 0;
 let frame = 0, lastTime = 0, visible = true, printing = false, printStart = 0;
 let printCount = 0, phase = 0, renderFrame = 0, sourceVersion = 0;
@@ -21,6 +23,8 @@ function enable(ready) {
 }
 
 function updateKnobs() {
+  document.documentElement.style.setProperty('--registration-x', `${settings.registration}px`);
+  document.documentElement.style.setProperty('--registration-y', `${settings.registration * -.55}px`);
   inputs.forEach((input, i) => {
     const value = Number(input.value);
     const fraction = (value - Number(input.min)) / (Number(input.max) - Number(input.min));
@@ -113,7 +117,7 @@ function finishPrint() {
   printCount++;
   $('#edition').textContent = String(printCount).padStart(3, '0');
   $('#machine-status').textContent = 'Impression ready';
-  $('#print').innerHTML = 'Pull another print <span aria-hidden="true">↗</span>';
+  $('#print').innerHTML = `<span>Pull another print</span>${arrowIcon}`;
   document.body.classList.remove('is-printing');
   $('[data-emerging-sheet]')?.removeAttribute('transform');
   enable(true);
@@ -147,8 +151,8 @@ function run() { if (!frame && visible && !document.hidden) frame = requestAnima
 $('#casing').addEventListener('click', () => {
   targetOpen = targetOpen ? 0 : 1;
   $('#casing').setAttribute('aria-pressed', String(!!targetOpen));
-  $('#casing').innerHTML = targetOpen ? 'Close casing <span aria-hidden="true">↙</span>' : 'Open casing <span aria-hidden="true">↗</span>';
-  $('#casing-hint').textContent = targetOpen ? 'Feed roller / ink plates / impression roller' : 'Lift the cover. See what makes it work.';
+  $('#casing').innerHTML = `${targetOpen ? 'Close' : 'Open'} casing ${casingIcon}`;
+  $('#casing-hint').textContent = targetOpen ? 'Rollers and ink plates exposed' : 'Open to inspect the mechanism';
   lastTime = 0;
   run();
 });
@@ -222,7 +226,7 @@ async function upload(file) {
     printCount = 0;
     $('#edition').textContent = '001';
     $('#machine-status').textContent = 'Ready to make an impression';
-    $('#print').innerHTML = 'Pull a print <span aria-hidden="true">↗</span>';
+    $('#print').innerHTML = `<span>Pull a print</span>${arrowIcon}`;
     updateProof();
     say('Photograph loaded. Turn the dials, then pull a print.');
   } catch (error) { say(error.message, true); }

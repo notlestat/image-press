@@ -3,51 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#edece7">
-  <meta name="description" content="An experimental two-ink image press. Feed in a photograph, adjust the print and pull an impression.">
-  <title>Image Press — An experiment in ink</title>
+  <meta name="theme-color" content="#f1f1ed">
+  <meta name="description" content="Turn a photograph into a two-ink halftone print. Adjust the press, inspect its mechanism and export your impression.">
+  <title>Image Press · An experiment in ink</title>
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/Archivo-Variable.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="/vendor/anatomy/kit/iso.css">
   <link rel="stylesheet" href="/src/style.css">
   <script type="module" src="/src/app.mjs"></script>
 </head>
 <body class="iso" data-theme="light">
+  <a class="skip-link" href="#workspace">Skip to the press</a>
+  <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 20 20 4M4 4h16v16"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+  </defs></svg>
   <div class="workshop">
     <header class="masthead">
-      <a class="wordmark" href="/" aria-label="Image Press home"><span class="mark" aria-hidden="true">i<span>p</span></span><span>IMAGE PRESS</span></a>
-      <span class="mast-note">AN EXPERIMENT IN INK & IMPERFECTION</span>
-      <span class="issue">NO. 001 <span class="accent">↗</span></span>
+      <a href="/" class="wordmark" aria-label="Image Press home"><span class="brand-register" aria-hidden="true"></span>Image Press</a>
+      <span class="mast-note">An interactive print experiment</span>
+      <span class="local-note"><i aria-hidden="true"></i> Runs in your browser</span>
     </header>
-    <main>
-      <section class="intro" aria-labelledby="title">
-        <div><h1 id="title">Image Press<span class="accent">.</span></h1></div>
+    <main id="workspace">
+      <section class="title-block" aria-labelledby="title">
+        <h1 id="title">Image Press</h1>
+        <div class="ink-key" aria-label="Print inks: carbon and vermilion">
+          <div class="registration-mark" aria-hidden="true"><span class="carbon-target"></span><span class="vermilion-target"></span></div>
+          <span>Carbon<br>Vermilion</span>
+        </div>
       </section>
       <div class="bench">
-        <section class="machine-section" aria-label="Printing machine">
-          <div class="section-label"><span><span class="tiny-cross">+</span> FIG. 01 / TWO-INK PROOFING PRESS</span><button id="casing" class="text-button" aria-pressed="false" disabled>Open casing <span aria-hidden="true">↗</span></button></div>
-          <div class="machine-stage iso-plate" id="machine-stage" aria-busy="true"><div id="machine" class="machine-art"></div><span class="stage-coordinate coord-left">X / 000<br>Y / 000</span><span class="stage-coordinate coord-right">INK SYSTEM<br>K + V</span></div>
-          <div class="machine-caption"><span class="status"><i aria-hidden="true"></i><span id="machine-status" data-readout>Preparing the press</span></span><span id="casing-hint">Lift the cover. See what makes it work.</span></div>
-          <div class="controls" aria-label="Print settings">
-            <div class="control"><div class="control-heading"><label for="halftone"><span>01</span> Halftone size</label><output for="halftone" id="halftone-value">14 <small>PX</small></output></div><div class="control-body"><div class="dial" data-dial="halftone" aria-hidden="true"><span></span></div><div class="range-wrap"><input id="halftone" type="range" min="6" max="36" step="1" value="14" disabled><div class="range-labels"><span>FINE</span><span>COARSE</span></div></div></div></div>
-            <div class="control"><div class="control-heading"><label for="contrast"><span>02</span> Contrast</label><output for="contrast" id="contrast-value">110 <small>%</small></output></div><div class="control-body"><div class="dial" data-dial="contrast" aria-hidden="true"><span></span></div><div class="range-wrap"><input id="contrast" type="range" min="50" max="180" step="1" value="110" disabled><div class="range-labels"><span>SOFT</span><span>HARD</span></div></div></div></div>
-            <div class="control"><div class="control-heading"><label for="registration"><span>03</span> Registration</label><output for="registration" id="registration-value">6.0 <small>PX</small></output></div><div class="control-body"><div class="dial" data-dial="registration" aria-hidden="true"><span></span></div><div class="range-wrap"><input id="registration" type="range" min="0" max="28" step="0.5" value="6" disabled><div class="range-labels"><span>PRECISE</span><span>WAYWARD</span></div></div></div></div>
+        <section class="machine-section" aria-label="Printing machine and controls">
+          <div class="source">
+            <div class="source-info"><span class="source-label">On the press</span><span id="source-name">Landscape study.jpg</span><span id="source-note">Sample photograph · replace with your own</span></div>
+            <button id="upload" class="upload-button" disabled><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg>Feed a photograph</button>
+            <input type="file" id="photo" name="photograph" accept="image/jpeg,image/png,image/webp,image/avif" hidden>
           </div>
+          <div class="machine-heading"><h2>The press</h2><button id="casing" class="text-button" aria-pressed="false" aria-controls="machine" disabled>Open casing <svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg></button></div>
+          <div class="machine-stage iso-plate" id="machine-stage" aria-busy="true"><div id="machine" class="machine-art"></div></div>
+          <div class="machine-caption"><span class="status"><i aria-hidden="true"></i><span id="machine-status" data-readout>Preparing the press…</span></span><span id="casing-hint">Open to inspect the mechanism</span></div>
+          <div class="settings-heading"><h2>Make your impression</h2><button id="reset" class="text-button" disabled>Reset settings</button></div>
+          <div class="controls" role="group" aria-label="Print settings">
+            <div class="control"><div class="control-heading"><label for="halftone">Halftone size</label><output for="halftone" id="halftone-value" aria-live="off">14 <small>PX</small></output></div><div class="control-body"><div class="dial-track"><div class="dial" data-dial="halftone" aria-hidden="true"><span></span></div></div><div class="range-wrap"><input id="halftone" name="halftone" type="range" min="6" max="36" step="1" value="14" disabled><div class="range-labels" aria-hidden="true"><span>Fine</span><span>Coarse</span></div></div></div></div>
+            <div class="control"><div class="control-heading"><label for="contrast">Contrast</label><output for="contrast" id="contrast-value" aria-live="off">110 <small>%</small></output></div><div class="control-body"><div class="dial-track"><div class="dial" data-dial="contrast" aria-hidden="true"><span></span></div></div><div class="range-wrap"><input id="contrast" name="contrast" type="range" min="50" max="180" step="1" value="110" disabled><div class="range-labels" aria-hidden="true"><span>Soft</span><span>Hard</span></div></div></div></div>
+            <div class="control"><div class="control-heading"><label for="registration">Registration offset</label><output for="registration" id="registration-value" aria-live="off">6.0 <small>PX</small></output></div><div class="control-body"><div class="dial-track"><div class="dial" data-dial="registration" aria-hidden="true"><span></span></div></div><div class="range-wrap"><input id="registration" name="registration" type="range" min="0" max="28" step="0.5" value="6" disabled><div class="range-labels" aria-hidden="true"><span>Aligned</span><span>Offset</span></div></div></div></div>
+          </div>
+          <button id="print" class="print-button" disabled><span>Pull a print</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+          <p id="message" class="message" role="status" aria-live="polite"></p>
         </section>
-        <aside class="proof-section" aria-label="Print preview">
-          <div class="section-label"><span><span class="tiny-cross">+</span> THE IMPRESSION</span><span id="edition">001</span></div>
-          <div class="proof-mat"><canvas id="proof" width="1600" height="2000" role="img" aria-label="Two-ink halftone print preview"></canvas><div class="proof-corner" aria-hidden="true">↗</div></div>
-          <div class="proof-spec"><span>VERMILION + CARBON</span><span>4 : 5</span></div>
-          <button id="export" class="export-button" disabled>Save impression <span aria-hidden="true">↓</span></button>
-          <p class="export-note">PNG / 1600 × 2000 PX</p>
+        <aside class="proof-section" aria-label="Live print preview">
+          <div class="proof-heading"><h2>Live impression</h2><span class="edition-label">No. <span id="edition">001</span></span></div>
+          <div class="proof-mat"><div class="paper"><canvas id="proof" width="1600" height="2000" role="img" aria-label="Live carbon and vermilion halftone print preview"></canvas></div></div>
+          <div class="proof-spec"><span><i class="ink-dot carbon" aria-hidden="true"></i>Carbon <i class="ink-dot vermilion" aria-hidden="true"></i>Vermilion</span><span>4:5 / Portrait</span></div>
+          <button id="export" class="export-button" disabled><span>Save impression<small>PNG · 1600 × 2000 px</small></span><svg class="icon" aria-hidden="true"><use href="#icon-download"/></svg></button>
         </aside>
       </div>
-      <section class="feed-bar" aria-label="Photo and printing">
-        <div class="source"><button id="upload" class="upload-button" disabled><span aria-hidden="true">+</span> Feed a photograph</button><input type="file" id="photo" accept="image/jpeg,image/png,image/webp,image/avif" hidden><div class="source-info"><span id="source-name">Landscape study.jpg</span><span id="source-note">A sample is on the press. Make it yours.</span></div></div>
-        <div class="print-actions"><button id="reset" class="text-button" disabled>Reset settings</button><button id="print" class="print-button" disabled>Pull a print <span aria-hidden="true">↗</span></button></div>
-      </section>
-      <p id="message" class="message" role="status" aria-live="polite"></p>
-      <footer><span>BUILT FOR THE BEAUTY OF GETTING IT SLIGHTLY WRONG.</span><span>YOUR PHOTOGRAPHS STAY IN YOUR BROWSER. <span class="accent">●</span></span></footer>
+      <footer><span>One photograph. Two colour plates.</span><span>Your photographs stay in your browser.</span></footer>
     </main>
   </div>
+  <div class="drop-indicator" aria-hidden="true"><span>Feed a photograph<small>Drop one image onto the press</small></span></div>
+  <noscript><p class="no-script">Image Press needs JavaScript to process photographs and operate the press.</p></noscript>
 </body>
 </html>
