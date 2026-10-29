@@ -4,7 +4,7 @@ An interactive two-ink photo press built with [Anatomy](https://github.com/where
 
 ![Image Press with its machine, three controls, and live two-ink print preview](docs/images/image-press.png)
 
-The interface takes its direction from Swiss print design: oversized red type, a ruled grid, physical dials, and an upright proof on a vermilion field. The machine sheet and preview use the same rendered image.
+The interface follows Swiss print design, with oversized red type, a ruled grid, physical dials, and an upright proof on a vermilion field. The machine sheet and preview use the same rendered image.
 
 ## Run locally
 
